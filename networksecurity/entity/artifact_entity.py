@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 
 @dataclass
+
+## THE OUTPUT OF THE DATA INGESTION SHOULD BE TRAINED FIULE PATH AND TEST FILE PATH
 class DataIngestionArtifact:
     trained_file_path:str
     test_file_path:str

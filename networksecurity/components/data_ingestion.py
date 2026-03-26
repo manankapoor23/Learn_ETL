@@ -20,12 +20,14 @@ MONGO_DB_URL=os.getenv("MONGO_DB_URL")
 
 
 class DataIngestion:
+    ## the data config step
     def __init__(self,data_ingestion_config:DataIngestionConfig):
         try:
             self.data_ingestion_config=data_ingestion_config
         except Exception as e:
             raise NetworkSecurityException(e,sys)
         
+    ## the intiate data ingestion step
     def export_collection_as_dataframe(self):
         """
         Read data from mongodb
@@ -44,7 +46,8 @@ class DataIngestion:
             return df
         except Exception as e:
             raise NetworkSecurityException(e,sys)
-        
+    
+    ## the export data into feature store step
     def export_data_into_feature_store(self,dataframe: pd.DataFrame):
         try:
             feature_store_file_path=self.data_ingestion_config.feature_store_file_path
@@ -57,6 +60,7 @@ class DataIngestion:
         except Exception as e:
             raise NetworkSecurityException(e,sys)
         
+    ## the split data as train test step
     def split_data_as_train_test(self,dataframe: pd.DataFrame):
         try:
             train_set, test_set = train_test_split(
@@ -88,6 +92,7 @@ class DataIngestion:
             raise NetworkSecurityException(e,sys)
         
         
+        ##    the initiate data ingestion step
     def initiate_data_ingestion(self):
         try:
             dataframe=self.export_collection_as_dataframe()
